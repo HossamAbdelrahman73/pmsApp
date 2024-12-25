@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
-import { routes } from 'src/app/shared/interfaces/routes.model';
+import { routes } from '../../../../../src/app/shared/interfaces/routes.model';
 
 @Component({
   selector: 'app-login',
