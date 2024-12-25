@@ -23,8 +23,11 @@ export class LoginComponent implements OnInit {
   ) {}
   hide: boolean = true;
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
+    email: new FormControl('hossam202110044@gmail.com', [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl('Zsacd1221@', [
       Validators.required,
       Validators.pattern(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
@@ -76,6 +79,6 @@ export class LoginComponent implements OnInit {
     }
   }
   public get getRoutes(): typeof routes {
-    return routes
+    return routes;
   }
 }
