@@ -1,0 +1,53 @@
+<section>
+  <div class="container">
+    <h1>Projects</h1>
+    <button class="orange-btn px-4" routerLink="create-project">
+      <mat-icon> add </mat-icon>
+      Add new project
+    </button>
+  </div>
+</section>
+<section>
+  <div class="container-fluid px-5">
+    <mat-form-field
+      class="example-form-field mb-4"
+      appearance="outline"
+      (keydown.enter)="getMyProjectsForManager()"
+    >
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="serchValue"
+        placeholder="Search by title"
+      />
+      <button
+        *ngIf="serchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="serchValue = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <app-table
+      (projectViewed)="viewProject($event)"
+      (DeletedItem)="openDialogDelete($event)"
+      (projectEdited)="navigateToEditProject($event)"
+      [displayedColumns]="displayedColumns"
+      [dataSource]="dataSource"
+      [actions]="actions"
+      [moduleName]="moduleName"
+    ></app-table>
+    <mat-paginator
+      [length]="finalResponce?.totalNumberOfRecords"
+      [pageSize]="pageSize"
+      [pageIndex]="pageNumber - 1"
+      (page)="handlePageEvent($event)"
+      [pageSizeOptions]="[5, 10, 25, 50, 100]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</section>

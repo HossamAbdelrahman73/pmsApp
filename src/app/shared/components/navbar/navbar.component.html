@@ -1,0 +1,37 @@
+<mat-toolbar class="navbar px-4">
+  <a
+    [routerLink]="
+      isManager() ? '/dashboard/manager/home' : '/dashboard/employee/home'
+    "
+  >
+    <img src="assets/images/nav-logo.svg" alt="" />
+  </a>
+  <div class="profile-wrapper d-flex align-items-center">
+    <mat-icon class="me-2">notifications</mat-icon>
+    <img [src]="imagePath" alt="Avatar" class="profile-image" />
+
+    <div class="profile-details d-flex">
+      <div class="user-info d-flex flex-column">
+        <span class="username">{{ userName }}</span>
+        <span class="email">{{ email }}</span>
+      </div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/dashboard/profile">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item routerLink="/change">
+          <mat-icon>lock_open</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

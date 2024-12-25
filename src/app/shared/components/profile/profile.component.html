@@ -1,0 +1,189 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="profile-form">
+      <form
+        class="form d-flex flex-column align-items-center"
+        [formGroup]="profileForm"
+        (ngSubmit)="onUpdate(profileForm)"
+      >
+        <div class="text-container pt-4 ps-4 align-self-baseline">
+          <h3 class="header m-0">Update your profile</h3>
+          <p class="paragraph">Please enter the details</p>
+        </div>
+        <div class="row my-2">
+          <div
+            class="col-md-12 d-flex justify-content-center align-content-center"
+          >
+            <ngx-dropzone
+              class="dropzone-container"
+              (change)="onSelect($event)"
+            >
+              <ngx-dropzone-label
+                >Drop photo <i class="fa-solid fa-cloud-upload"></i
+              ></ngx-dropzone-label>
+              <ngx-dropzone-image-preview
+                ngProjectAs="ngx-dropzone-preview"
+                *ngFor="let f of files"
+                [file]="f"
+                class="dropzone-preview"
+                [removable]="true"
+                (removed)="onRemove(f)"
+              >
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </div>
+        </div>
+        <div class="row w-100 justify-content-evenly">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User name</mat-label>
+              <input
+                formControlName="userName"
+                matInput
+                type="text"
+                placeholder="Enter user name"
+              />
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error
+                *ngIf="
+                  profileForm.get('userName')?.invalid &&
+                  profileForm.get('userName')?.touched
+                "
+              >
+                <small *ngIf="profileForm.get('userName')?.errors?.['required']"
+                  >User name is required</small
+                >
+                <small *ngIf="profileForm.get('userName')?.errors?.['pattern']">
+                  The username must contain at least one number & can't include
+                  spaces.
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                formControlName="email"
+                matInput
+                placeholder="Enter email"
+                type="email"
+              />
+              <mat-icon matPrefix>email</mat-icon>
+              <mat-error
+                *ngIf="
+                  profileForm.get('email')?.invalid &&
+                  profileForm.get('email')?.touched
+                "
+              >
+                <small *ngIf="profileForm.get('email')?.errors?.['required']"
+                  >Email is required</small
+                >
+                <small *ngIf="profileForm.get('email')?.errors?.['email']">
+                  Email is not valid
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row w-100 justify-content-evenly">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Country</mat-label>
+              <input
+                formControlName="country"
+                matInput
+                type="text"
+                placeholder="Enter country"
+              />
+              <mat-icon matPrefix>public</mat-icon>
+              <mat-error
+                *ngIf="
+                  profileForm.get('country')?.invalid &&
+                  profileForm.get('country')?.touched
+                "
+              >
+                <small *ngIf="profileForm.get('country')?.errors?.['required']"
+                  >Country is required</small
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Phone number</mat-label>
+              <input
+                formControlName="phoneNumber"
+                matInput
+                type="text"
+                placeholder="Enter phone number"
+              />
+              <mat-icon matPrefix>phone</mat-icon>
+              <mat-error
+                *ngIf="
+                  profileForm.get('phoneNumber')?.invalid &&
+                  profileForm.get('phoneNumber')?.touched
+                "
+              >
+                <small
+                  *ngIf="profileForm.get('phoneNumber')?.errors?.['required']"
+                  >Phone number is required</small
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row w-100 justify-content-evenly mb-3">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Confirm password</mat-label>
+              <input
+                formControlName="confirmPassword"
+                matInput
+                [type]="hideConfirmPassword ? 'text' : 'password'"
+                placeholder="Confirm password"
+              />
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="hideConfirmPassword = !hideConfirmPassword"
+                matSuffix
+                >{{
+                  hideConfirmPassword ? "visibility" : "visibility_off"
+                }}</mat-icon
+              >
+              <mat-error
+                *ngIf="
+                  profileForm.get('confirmPassword')?.invalid &&
+                  profileForm.get('confirmPassword')?.touched
+                "
+              >
+                <small
+                  *ngIf="profileForm.get('confirmPassword')?.errors?.['required']"
+                  >Confirm password is required</small
+                >
+                <small
+                  *ngIf="profileForm.get('confirmPassword')?.errors?.['pattern']"
+                >
+                  The password must contain at least one number and can't
+                  include spaces.
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-5 m-auto">
+          <button
+            class="w-100 orange-btn"
+            [disabled]="!profileForm.valid"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

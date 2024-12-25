@@ -1,0 +1,59 @@
+<section class="auth-section">
+  <div class="container-fluid">
+    <div class="image-container">
+      <img src="assets/images/logo.svg" alt="logo" />
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="auth-form">
+          <div class="form__header mb-4">
+            <p class="form__header-paragraph">Welcome to PMS</p>
+
+            <h1 class="form__header-title">
+              <span class="underline-text">F</span>orget password
+            </h1>
+          </div>
+          <div class="form__wrapper">
+            <form
+              #resetReqForm="ngForm"
+              class="example-form form"
+              (ngSubmit)="onSubmit(resetReqForm)"
+            >
+              <mat-form-field class="custom-field">
+                <mat-label class="form--label">Email</mat-label>
+                <input
+                  class="form-input"
+                  matInput
+                  type="text"
+                  name="email"
+                  [(ngModel)]="email"
+                  required
+                  email
+                  #emailInput="ngModel"
+                  placeholder="Enter your email"
+                />
+                <mat-error *ngIf="emailInput?.invalid && emailInput?.touched">
+                  <span *ngIf="emailInput?.errors?.['required']"
+                    >Email is required</span
+                  >
+                  <span *ngIf="emailInput?.errors?.['email']"
+                    >Invalid email format</span
+                  >
+                </mat-error>
+              </mat-form-field>
+              <div class="form__actions col-md-10">
+                <button
+                  type="submit"
+                  class="orange-btn"
+                  [disabled]="resetReqForm.invalid"
+                >
+                  Verify
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

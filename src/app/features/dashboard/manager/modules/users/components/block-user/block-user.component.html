@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>
+  {{ data.isActivated === true ? "Block" : "Unblock" }} User
+</h2>
+<mat-dialog-content>
+  <p>
+    Are you sure you want to
+    {{ data.isActivated === true ? "Block" : "Unblock" }}
+    <strong>{{ data.userName }}</strong
+    >?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button
+    mat-raised-button
+    [class]="data.isActivated === true ? 'warn' : 'orange'"
+    [mat-dialog-close]="true"
+  >
+    {{ data.isActivated === true ? "Block" : "Unblock" }}
+  </button>
+</mat-dialog-actions>

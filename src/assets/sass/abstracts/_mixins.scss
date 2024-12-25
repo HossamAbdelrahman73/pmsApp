@@ -1,0 +1,30 @@
+@mixin divCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@mixin line-under-title {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background-color: $color-orange;
+  }
+}
+@mixin auth-bg($background-url) {
+  height: 100%;
+  background-image: url($background-url);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

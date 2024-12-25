@@ -1,0 +1,20 @@
+@import "/src/assets/sass/main.scss";
+
+section {
+  .header {
+    span {
+      @include flex-between;
+      width: fit-content;
+      cursor: pointer;
+    }
+  }
+  .container {
+    .create-project-form {
+      .form__wrapper {
+        .form__actions {
+          @include flex-between;
+        }
+      }
+    }
+  }
+}

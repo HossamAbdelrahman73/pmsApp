@@ -1,0 +1,93 @@
+<section class="auth-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="w-100 pe-5 mb-3 mx-auto text-center">
+          <img src="./assets/images/logo.svg" class="w-50" alt="logo" />
+        </div>
+        <div class="auth-form">
+          <div class="form__header">
+            <p class="form__header-paragraph">Welcome to PMS</p>
+
+            <h1 class="form__header-title">
+              <span class="underline-text">V</span>erify Password
+            </h1>
+          </div>
+          <div class="form__wrapper">
+            <form
+              class="example-form form"
+              [formGroup]="verifyAccountForm"
+              (ngSubmit)="onVerify(verifyAccountForm)"
+            >
+              <mat-form-field class="custom-field">
+                <mat-label class="form--label">Email</mat-label>
+                <input
+                  class="form-input"
+                  type="email"
+                  matInput
+                  placeholder="Enter your email"
+                  formControlName="email"
+                />
+                <mat-error
+                  *ngIf="
+                    (verifyAccountForm.get('email')?.errors &&
+                      verifyAccountForm.get('email')?.touched) ||
+                    verifyAccountForm.get('email')?.dirty
+                  "
+                  class="py-0"
+                >
+                  <span
+                    class="p-1 mb-0"
+                    *ngIf=" verifyAccountForm.get('email')?.errors?.['required']"
+                  >
+                    Email is required
+                  </span>
+                  <span
+                    class="p-1 mb-0"
+                    *ngIf=" verifyAccountForm.get('email')?.errors?.['email']"
+                  >
+                    Email invalid format
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="custom-field">
+                <mat-label class="form--label">OTP Verification</mat-label>
+                <input
+                  class="form-input"
+                  type="email"
+                  matInput
+                  placeholder="Enter Verification"
+                  formControlName="code"
+                />
+                <mat-error
+                  *ngIf="
+                    verifyAccountForm.get('code')?.errors &&
+                    (verifyAccountForm.get('code')?.touched ||
+                      verifyAccountForm.get('code')?.dirty)
+                  "
+                >
+                  <span
+                    class="p-1 mb-0"
+                    *ngIf="verifyAccountForm.get('code')?.getError('required')"
+                  >
+                    Code is required
+                  </span>
+                </mat-error>
+              </mat-form-field>
+              <div class="form__actions col-md-7 mt-2">
+                <button
+                  [disabled]="verifyAccountForm.invalid"
+                  type="submit"
+                  class="orange-btn"
+                >
+                  verify
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

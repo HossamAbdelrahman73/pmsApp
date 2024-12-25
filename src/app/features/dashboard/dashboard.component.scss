@@ -1,0 +1,30 @@
+@import "/src/assets/sass/main.scss";
+
+.container-fluid {
+  padding: 0 !important;
+  font-family: $font-montserrat;
+  .row {
+    margin: 0 !important;
+    .col-md-1,
+    .col-md-2 {
+      padding: 0 !important;
+    }
+    .col-md-1 {
+      width: 7% !important;
+    }
+    .col-md-2 {
+      width: 15% !important;
+    }
+    .col-md-10,
+    .col-md-11 {
+      margin-top: 4rem;
+      padding: 0 !important;
+    }
+    .col-md-10 {
+      width: 85% !important;
+    }
+    .col-md-11 {
+      width: 93% !important;
+    }
+  }
+}

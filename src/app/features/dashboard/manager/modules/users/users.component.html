@@ -1,0 +1,77 @@
+<section>
+  <div class="header flex-column shadow-sm d-flex">
+    <div class="wrapper d-flex justify-content-between">
+      <h1>Users</h1>
+      <button class="orange-btn px-4" routerLink="add-manager">
+        <mat-icon> add </mat-icon> Add new user
+      </button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row column-gap-3 p-2 ms-4 my-4">
+      <mat-form-field class="search">
+        <mat-label>Search by</mat-label>
+        <mat-select
+          [(ngModel)]="searchBy"
+          (selectionChange)="updateSearchPlaceholder(searchBy)"
+        >
+          <mat-option value="userName">Name</mat-option>
+          <mat-option value="email">Email</mat-option>
+          <mat-option value="country">Country</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search2" appearance="outline">
+        <mat-label>{{ searchLabel }}</mat-label>
+        <input
+          (keydown.enter)="getAllUsers()"
+          matInput
+          [(ngModel)]="searchVal"
+          [placeholder]="searchPlaceholder"
+        />
+        <mat-icon matSuffix>{{ searchIcon }}</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="search">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="roleId" (selectionChange)="getAllUsers()">
+          <mat-option [value]="[1, 2]">All</mat-option>
+          <mat-option [value]="1">Manager</mat-option>
+          <mat-option [value]="2">Employee</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search">
+        <mat-label>Filter users</mat-label>
+        <mat-select
+          [(ngModel)]="filterType"
+          (selectionChange)="onFilterTypeChange()"
+        >
+          <mat-option value="all">All users</mat-option>
+          <mat-option value="my">My users</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button type="button" class="orange-btn" (click)="clearFilters()">
+        Clear Filters
+      </button>
+    </div>
+    <div class="container px-5">
+      <div class="row">
+        <app-table
+          (userViewed)="viewUser($event)"
+          [displayedColumns]="displayedColumns"
+          [dataSource]="dataSource"
+          [actions]="actions"
+          [moduleName]="moduleName"
+          (userBlocked)="blockUser($event)"
+        ></app-table>
+      </div>
+    </div>
+  </div>
+</section>
+<mat-paginator
+  [length]="tableRes?.totalNumberOfRecords"
+  [pageSize]="pageSize"
+  (page)="handlePageEvent($event)"
+  [pageSizeOptions]="[10, 25, 50, 100]"
+  aria-label="Select page"
+>
+</mat-paginator>

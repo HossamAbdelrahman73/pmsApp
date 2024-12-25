@@ -1,0 +1,35 @@
+.orange-btn {
+  border-radius: $border-radius-btn;
+  background-color: $color-orange;
+  color: $color-white;
+  border: 1px solid $color-orange;
+  // font-weight: 700;
+  // font-size: 2rem;
+  padding: 0.5rem;
+}
+
+.transparent-btn {
+  line-height: 19.5px;
+  color: $dark-green-bg;
+  border: 1px solid $dark-green-bg;
+  padding: 0.5rem;
+  border-radius: $border-radius-btn;
+  background-color: $color-white;
+  transition: $main-transition;
+  &:hover {
+    background-color: $color-orange;
+    color: $color-white;
+    border: 1px solid $color-orange;
+  }
+}
+.orange-btn-without-border-radius {
+  background-color: transparent;
+  color: $color-orange;
+  border: 1px solid $color-orange;
+  padding: 0.5rem;
+  transition: $main-transition;
+  &:hover {
+    background-color: $color-orange;
+    color: $color-white;
+  }
+}

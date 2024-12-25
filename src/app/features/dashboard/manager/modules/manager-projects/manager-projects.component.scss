@@ -1,0 +1,23 @@
+@import "/src/assets/sass/main.scss";
+
+section {
+  background-color: $color-white;
+  .container {
+    @include flex-between;
+    padding: 2rem;
+    h1 {
+      color: $color-gray;
+      font-size: 28px;
+    }
+    button {
+      @include flex-between;
+    }
+  }
+  .container-fluid {
+    mat-form-field {
+      input {
+        color: $color-black !important;
+      }
+    }
+  }
+}

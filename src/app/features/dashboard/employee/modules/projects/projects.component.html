@@ -1,0 +1,43 @@
+<section *ngIf="dataSource">
+  <div class="bg-white p-4">
+    <h1>Projects</h1>
+  </div>
+
+  <div class="container px-3">
+    <div class="d-flex align-items-center gap-4 px-3 py-2">
+      <div>
+        <!-- filterName == 'title'; else status -->
+        <mat-form-field>
+          <mat-label
+            ><i class="fa-solid fa-magnifying-glass pe-2"></i> Search</mat-label
+          >
+
+          <input
+            [(ngModel)]="searchName"
+            (keydown.enter)="getProjects()"
+            matInput
+            placeholder="Title"
+            #input
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <app-table
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      [moduleName]="moduleName"
+    >
+    </app-table>
+
+    <mat-paginator
+      (page)="handlePageEvent($event)"
+      [length]="numRows"
+      [pageIndex]="pageNumber - 1"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</section>

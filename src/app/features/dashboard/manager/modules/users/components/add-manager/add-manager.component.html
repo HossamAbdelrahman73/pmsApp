@@ -1,0 +1,232 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="create-manager-form">
+      <form
+        class="form d-flex flex-column align-items-center row-gap-3"
+        [formGroup]="createManagerForm"
+        (ngSubmit)="onCreateManager(createManagerForm)"
+      >
+        <div class="text-container pt-4 ps-4 align-self-baseline">
+          <h3 class="header m-0">Create new Manager</h3>
+          <p class="paragraph">Please enter the new manager's details</p>
+        </div>
+        <div class="row my-2">
+          <div
+            class="col-md-12 d-flex justify-content-center align-content-center"
+          >
+            <ngx-dropzone
+              class="dropzone-container"
+              (change)="onSelect($event)"
+            >
+              <ngx-dropzone-label
+                >Drop photo <i class="fa-solid fa-cloud-upload"></i
+              ></ngx-dropzone-label>
+              <ngx-dropzone-image-preview
+                ngProjectAs="ngx-dropzone-preview"
+                *ngFor="let f of files"
+                [file]="f"
+                class="dropzone-preview"
+                [removable]="true"
+                (removed)="onRemove(f)"
+              >
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </div>
+        </div>
+        <div class="row w-100 justify-content-evenly">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User name</mat-label>
+              <input
+                formControlName="userName"
+                matInput
+                type="text"
+                placeholder="Enter user name"
+              />
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error
+                *ngIf="
+                  createManagerForm.get('userName')?.invalid &&
+                  createManagerForm.get('userName')?.touched
+                "
+              >
+                <small
+                  *ngIf="createManagerForm.get('userName')?.errors?.['required']"
+                  >User name is required</small
+                >
+                <small
+                  *ngIf="createManagerForm.get('userName')?.errors?.['pattern']"
+                >
+                  The username must contain at least one number & can't include
+                  spaces.
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                formControlName="email"
+                matInput
+                placeholder="Enter email"
+                type="email"
+              />
+              <mat-icon matPrefix>email</mat-icon>
+              <mat-error
+                *ngIf="
+                  createManagerForm.get('email')?.invalid &&
+                  createManagerForm.get('email')?.touched
+                "
+              >
+                <small
+                  *ngIf="createManagerForm.get('email')?.errors?.['required']"
+                  >Email is required</small
+                >
+                <small
+                  *ngIf="createManagerForm.get('email')?.errors?.['email']"
+                >
+                  Email is not valid
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row w-100 justify-content-evenly">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Country</mat-label>
+              <input
+                formControlName="country"
+                matInput
+                type="text"
+                placeholder="Enter country"
+              />
+              <mat-icon matPrefix>public</mat-icon>
+              <mat-error
+                *ngIf="
+                  createManagerForm.get('country')?.invalid &&
+                  createManagerForm.get('country')?.touched
+                "
+              >
+                <small
+                  *ngIf="createManagerForm.get('country')?.errors?.['required']"
+                  >Country is required</small
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Phone number</mat-label>
+              <input
+                formControlName="phoneNumber"
+                matInput
+                type="text"
+                placeholder="Enter phone number"
+              />
+              <mat-icon matPrefix>phone</mat-icon>
+              <mat-error
+                *ngIf="
+                  createManagerForm.get('phoneNumber')?.invalid &&
+                  createManagerForm.get('phoneNumber')?.touched
+                "
+              >
+                <small
+                  *ngIf="createManagerForm.get('phoneNumber')?.errors?.['required']"
+                  >Phone number is required</small
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row w-100 justify-content-evenly mb-3">
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                formControlName="password"
+                matInput
+                [type]="hidePassword ? 'text' : 'password'"
+                placeholder="Enter password"
+              />
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="hidePassword = !hidePassword"
+                matSuffix
+                >{{ hidePassword ? "visibility" : "visibility_off" }}</mat-icon
+              >
+
+              <mat-error
+                *ngIf="
+                  createManagerForm.get('password')?.invalid &&
+                  createManagerForm.get('password')?.touched
+                "
+              >
+                <small
+                  *ngIf="createManagerForm.get('password')?.errors?.['required']"
+                  >password is required</small
+                >
+                <small
+                  *ngIf="createManagerForm.get('password')?.errors?.['pattern']"
+                >
+                  The password must contain at least one number and can't
+                  include spaces.
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Confirm password</mat-label>
+              <input
+                formControlName="confirmPassword"
+                matInput
+                [type]="hideConfirmPassword ? 'text' : 'password'"
+                placeholder="Confirm password"
+              />
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="hideConfirmPassword = !hideConfirmPassword"
+                matSuffix
+                >{{
+                  hideConfirmPassword ? "visibility" : "visibility_off"
+                }}</mat-icon
+              >
+              <mat-error
+                *ngIf="
+                  createManagerForm.get('confirmPassword')?.invalid &&
+                  createManagerForm.get('confirmPassword')?.touched
+                "
+              >
+                <small
+                  *ngIf="createManagerForm.get('confirmPassword')?.errors?.['required']"
+                  >Confirm password is required</small
+                >
+                <small
+                  *ngIf="createManagerForm.get('confirmPassword')?.errors?.['pattern']"
+                >
+                  The password must contain at least one number and can't
+                  include spaces.
+                </small>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-5 m-auto">
+          <button
+            class="w-100 orange-btn"
+            [disabled]="!createManagerForm.valid"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

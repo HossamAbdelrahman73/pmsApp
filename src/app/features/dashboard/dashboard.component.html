@@ -1,0 +1,29 @@
+<div class="container-fluid h-100">
+  <nav>
+    <app-navbar
+      [email]="email"
+      [userName]="userName"
+      [imagePath]="imagePath ? imageUrl + imagePath : imagePath"
+    ></app-navbar>
+  </nav>
+  <div class="row w-100">
+    <div
+      [ngClass]="{
+        'col-md-2': isSidebarExpanded,
+        'col-md-1': !isSidebarExpanded
+      }"
+    >
+      <aside>
+        <app-sidebar (toggle)="isSidebarExpanded = $event"></app-sidebar>
+      </aside>
+    </div>
+    <div
+      [ngClass]="{
+        'col-md-10': isSidebarExpanded,
+        'col-md-11': !isSidebarExpanded
+      }"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

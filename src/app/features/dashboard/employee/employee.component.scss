@@ -1,0 +1,106 @@
+@import "/src/assets/sass/main.scss";
+
+section {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: $dashboard-bg-color ;
+  &.main {
+    .container-fluid {
+      height: 13rem;
+      border-radius: 1rem;
+      background: linear-gradient(#31595170, #31595170),
+        url("../../../../assets/images/home.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      .row {
+        .col-md-12 {
+          .text-container {
+            padding: 2.5rem;
+            h1 {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.sctatistics {
+    .contetnt {
+      .card {
+        border-radius: 15px;
+        padding: 1rem;
+        .card-icon {
+          height: 40px;
+          width: 40px;
+          border-radius: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .card-content {
+          h5 {
+            font-size: 13px;
+            font-weight: 500;
+            color: #6f7881;
+          }
+          p {
+            font-size: 20px;
+            line-height: 24px;
+            color: #000;
+          }
+        }
+        &.first-card {
+          background-color: #e5e6f4;
+          .card-icon {
+            background-color: #cfd1ec;
+          }
+        }
+        &.second-card {
+          background-color: #f4f4e5;
+          .card-icon {
+            background-color: #e4e4bc;
+          }
+        }
+        &.third-card {
+          background-color: #f4e5ed;
+          .card-icon {
+            background-color: #e7c3d7;
+          }
+        }
+      }
+    }
+    .chartTask {
+      canvas {
+        max-height: 250px;
+      }
+
+    }
+  }
+  .container-fluid {
+    margin-top: 2.5rem;
+    .row {
+      height: 100%;
+      .col-md-12 {
+        display: flex;
+        align-items: center;
+        .text-container {
+          padding: 1rem;
+          font-family: Montserrat;
+          font-weight: 400;
+          color: $color-white;
+          h1 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            span {
+              color: $color-orange;
+            }
+          }
+          p {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+}

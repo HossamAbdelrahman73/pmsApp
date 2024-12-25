@@ -1,0 +1,30 @@
+@import "/src/assets/sass/main.scss";
+section {
+  &.delete {
+    background-color: $dark-green-bg;
+    color: $color-white;
+    div {
+      span {
+        &.icon-close {
+          height: 25px;
+          width: 25px;
+          border-radius: 50%;
+          border: 1px solid $color-orange;
+          cursor: pointer;
+          transition: $main-transition;
+          &:hover {
+            background-color: $color-orange;
+            border-color: $color-orange;
+            i {
+              color: #fff;
+            }
+          }
+          i {
+            color: $color-orange;
+            transition: $main-transition;
+          }
+        }
+      }
+    }
+  }
+}

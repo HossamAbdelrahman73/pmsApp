@@ -1,0 +1,58 @@
+ <section class="p-4 delete">
+  <div class="position-relative">
+    <span
+      class="position-absolute d-flex justify-content-center align-items-center top-0 end-0 icon-close"
+    >
+      <button (click)="onNoClick()" class="bg-transparent border-0">
+        <i class="fa-solid fa-close"></i>
+      </button>
+    </span>
+    <div>
+      <div class="text-center">
+
+      </div>
+      <h4 *ngIf="data.title; else username" class="mb-3">
+        Delete <span class="fw-bold">{{ data.title }}?</span>
+      </h4>
+      <ng-template #username>
+        Delete <span class="fw-bold">{{ data.userName }}?</span>
+      </ng-template>
+      <div class="text-start">
+        <p>
+          Are you sure you want to delete
+          <span *ngIf="data.title; else username1" class="fw-semibold">{{
+            data.title
+          }}</span>
+          ? if you are sure just click on delete it
+        </p>
+        <ng-template #username1>
+          <span>{{ data.userName }}?</span>
+        </ng-template>
+      </div>
+    </div>
+    <div mat-dialog-actions [align]="'end'">
+      <button
+        class="orange-btn-without-border-radius"
+        *ngIf="data.title; else username2"
+        [mat-dialog-close]="data"
+        cdkFocusInitial
+      >
+        Delete <span>{{ data.title }}</span>
+      </button>
+      <ng-template #username2>
+        <button
+          class="orange-btn-without-border-radius"
+          [mat-dialog-close]="data"
+          cdkFocusInitial
+        >
+          Delete
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</section>
+
+
+
+
+

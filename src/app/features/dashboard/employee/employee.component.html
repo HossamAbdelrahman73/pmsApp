@@ -1,0 +1,57 @@
+<section class="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-container">
+          <h1>Welcome <span>{{  userName  }}</span></h1>
+          <p>You can add project and assign tasks to your team</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sctatistics">
+  <div class="container-fluid">
+    <div class="row mb-4 flex-nowrap">
+      <div class="col-md-6">
+        <h3 class="mb-3">Tasks</h3>
+        <div class="contetnt">
+          <div class="row gap-4">
+            <div class="col-md-4">
+              <div class="card second-card">
+                <div class="card-headerr mb-3">
+                  <span class="card-icon">
+                    <mat-icon> playlist_add_check </mat-icon>
+                  </span>
+                </div>
+                <div class="card-content">
+                  <h5>Tasks number</h5>
+                  <p>{{ totaltasksCount }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card third-card">
+                <div class="card-headerr mb-3">
+                  <span class="card-icon">
+                    <mat-icon> install_mobile </mat-icon>
+                  </span>
+                </div>
+                <div class="card-content">
+                  <h5>Projects number</h5>
+                  <p>{{ totalProjectsCount }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div id="chartTask" class="p-2 rounded-3 chartTask">
+          <h2 class="mb-3">Projects</h2>
+          <canvas id="taskChart">{{ chart }}</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

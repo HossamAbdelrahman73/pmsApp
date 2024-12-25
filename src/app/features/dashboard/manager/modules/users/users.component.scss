@@ -1,0 +1,40 @@
+@import "/src/assets/sass/main.scss";
+section {
+  .header {
+    .wrapper {
+      font-family: $font-montserrat;
+      background-color: $color-white;
+      padding: 2.5rem;
+      h1 {
+        font-weight: 500;
+        font-size: 28px;
+        color: #4f4f4f;
+      }
+      button {
+        mat-icon {
+          vertical-align: bottom;
+        }
+      }
+    }
+  }
+  .container {
+    .row {
+      .search {
+        width: 15%;
+
+        --mat-select-focused-arrow-color: orange;
+        --mdc-filled-text-field-focus-label-text-color: orange;
+        --mat-option-selected-state-label-text-color: orange !important;
+      }
+      .mdc-list-item__primary-text {
+        color: orange !important;
+      }
+      .search2 {
+        width: 30%;
+      }
+      .orange-btn {
+        width: 11%;
+      }
+    }
+  }
+}

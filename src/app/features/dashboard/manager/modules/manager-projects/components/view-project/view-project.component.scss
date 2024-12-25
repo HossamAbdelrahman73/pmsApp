@@ -1,0 +1,27 @@
+@import "/src/assets/sass/main.scss";
+
+section {
+  background-color: $dark-green-bg;
+  color: $color-white;
+  padding: 3rem 0;
+  .container {
+    .project-title {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    .project-details {
+      padding: 10px 0 10px 10px;
+      border-radius: 200px 0px 0px 200px;
+      -webkit-box-shadow: 0px 0px 8px 9px $color-orange;
+      -moz-box-shadow: 0px 0px 8px 9px $color-orange;
+      box-shadow: 0px 0px 8px 9px $color-orange;
+      .project-details-content {
+        border-radius: 200px 0px 0px 200px;
+        padding: 2rem;
+        border: 1px solid $color-white;
+        border-right: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+@import "/src/assets/sass/main.scss";
+
+.sidebar {
+  width: 15%;
+  transition: width 0.3s ease;
+  background-color: $dark-green-bg;
+  height: 100%;
+  position: fixed;
+  top: 10%;
+  color: $color-white;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17.07px;
+  &.collapsed {
+    width: 7%;
+    .toggle-btn {
+      right: -0.6rem;
+      transform: translateX(50%);
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    ul {
+      margin-left: 0;
+      li {
+        &:last-child {
+          margin-left: 0.2rem;
+        }
+        justify-content: center;
+        a {
+          justify-content: center;
+          width: fit-content;
+
+          .material-icons {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .toggle-btn {
+    background-color: $color-orange;
+    color: $color-white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: fit-content;
+    right: 0;
+    height: 1.5rem;
+    top: 2%;
+    border-radius: 0.5rem 0 0 0.5rem;
+    transform: translateX(0);
+    mat-icon {
+      vertical-align: middle;
+      width: 18px;
+    }
+  }
+
+  ul {
+    margin-left: 0.5rem;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 2.5rem;
+  }
+
+  li {
+    line-height: 2rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover,
+    &:active {
+      color: $color-orange;
+      a {
+        background-color: $orange-gradient;
+      }
+      .material-icons,
+      .nav-text {
+        color: $color-orange;
+      }
+    }
+  }
+
+  a {
+    padding: 0.6rem 0;
+    border-radius: 0.5rem;
+    width: 95%;
+    display: flex;
+    column-gap: 0.5rem;
+    text-decoration: none;
+    color: $color-white;
+    align-items: center;
+    &.active {
+      color: $color-orange;
+    }
+    .material-icons {
+      margin-right: 0.5rem;
+      transition: margin-right 0.3s ease;
+    }
+
+    .nav-text {
+      transition: opacity 0.3s ease, margin-left 0.3s ease;
+      margin-left: 10px;
+
+      .sidebar.collapsed & {
+        opacity: 0;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.content {
+  margin-left: 200px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+
+  .sidebar.collapsed + & {
+    margin-left: 70px;
+  }
+}

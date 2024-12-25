@@ -1,0 +1,18 @@
+<section>
+  <div class="container-fluid pe-0">
+    <div class="d-flex ps-3 justify-content-between">
+      <div class="d-flex align-items-center fs-3 fw-bolder">
+        {{ data.title }}
+      </div>
+
+      <div class="project-details">
+        <div class="project-details-content">
+          <p>Manager:{{ data.project.manager.userName }}</p>
+          <p>Title: {{ data.project.title }}</p>
+          <p>creationDate: {{ data.creationDate | date }}</p>
+          <p>Status: {{ data.status }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

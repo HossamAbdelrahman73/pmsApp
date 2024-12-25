@@ -1,0 +1,126 @@
+<section class="auth-section">
+  <div class="container-fluid">
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-3">
+        <img src="./assets/images/logo.svg" class="w-100" alt="logo" />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="auth-form py-4">
+          <div class="row justify-content-center w-100">
+            <div class="col-md-10">
+              <div class="form__header mb-3">
+                <p class="form__header-paragraph text-white">Welcome to PMS</p>
+
+                <h1 class="form__header-title">
+                  <span class="underline-text">L</span>ogin
+                </h1>
+              </div>
+              <div class="form__wrapper">
+                <form
+                  class="example-form form mb-2"
+                  [formGroup]="loginForm"
+                  (ngSubmit)="login(loginForm)"
+                >
+                    <mat-form-field class="example-full-width py-0">
+                    <mat-label class="form--label">Email</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter your email"
+                      type="email"
+                      matInput
+                      class="form-input"
+                      formControlName="email"
+                    />
+                    <mat-error
+                      *ngIf="
+                        formData['email'].errors &&
+                        (formData['email'].touched || formData['email'].dirty)
+                      "
+                      class="py-0"
+                    >
+                      <span
+                        class="p-1 mb-0"
+                        *ngIf="formData['email'].getError('required')"
+                      >
+                        Email is required
+                      </span>
+                      <span
+                        class="p-1 mb-0"
+                        *ngIf="formData['email'].getError('email')"
+                      >
+                        Email invalid format
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+  <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input
+                      placeholder="Enter your password"
+                      formControlName="password"
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                    />
+                    <mat-error
+                      *ngIf="
+                        formData['password'].errors &&
+                        (formData['password'].touched ||
+                          formData['password'].dirty)
+                      "
+                    >
+                      <span
+                        class="p-1 mb-0"
+                        *ngIf="formData['password'].getError('required')"
+                      >
+                        Password is required
+                      </span>
+                      <span
+                        class="p-1 mb-0"
+                        *ngIf="formData['password'].getError('pattern')"
+                      >
+                        Password Invalid Format
+                      </span>
+                    </mat-error>
+                    <button
+                      mat-icon-button
+                      matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide"
+                    >
+                      <mat-icon>{{
+                        hide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <div class="row w-100">
+                    <div
+                      class="form__links d-flex justify-content-between align-items-center mb-4 w-100"
+                    >
+                      <a
+                      [routerLink]="getRoutes.register"
+                        class="link form__paragraph"
+                        >Register now ?</a
+                      >
+                      <a
+                      [routerLink]="getRoutes.forgotPassword"
+                        class="link form__paragraph"
+                        >Forgot Password ?</a
+                      >
+                    </div>
+                    <div class="col-md-6 form__actions">
+                      <button class="orange-btn w-100 border-0" type="submit">
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

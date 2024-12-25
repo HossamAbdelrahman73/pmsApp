@@ -1,0 +1,50 @@
+@import "/src/assets/sass/main.scss";
+section {
+  h2 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: $color-gray;
+  }
+
+  .transparent-btn {
+    &:hover {
+      background-color: rgb(152, 47, 47);
+      color: $color-white;
+      border: 1px solid transparent;
+    }
+  }
+  .orange-btn {
+    &:hover {
+      background-color: $color-orange;
+      color: $color-white;
+      border: 1px solid transparent;
+    }
+  }
+}
+
+::ng-deep mat-form-field .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 16px !important;
+}
+
+::ng-deep mat-form-field .mdc-text-field--filled {
+  --mdc-filled-text-field-container-shape: 16px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border: 1px solid gray;
+  --mdc-filled-text-field-active-indicator-height: 0px;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  border: 1px solid gray !important;
+}
+.mat-mdc-form-field.mat-accent {
+  --mat-select-enabled-trigger-text-color: #ef9b28 !important;
+}
+
+::ng-deep html {
+  --mdc-filled-text-field-container-color: transparent;
+  --mdc-filled-text-field-input-text-color: #ef9b28;
+  --mdc-outlined-text-field-input-text-color: #ef9b28;
+  --mdc-filled-text-field-active-indicator-color: transparent;
+}

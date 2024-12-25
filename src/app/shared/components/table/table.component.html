@@ -1,0 +1,353 @@
+<div [ngSwitch]="moduleName">
+  <div *ngSwitchCase="'tasks'">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container
+        *ngFor="let column of displayedColumns"
+        [matColumnDef]="column"
+      >
+        <th mat-header-cell *matHeaderCellDef>
+          {{ column | titlecase }}
+          <i
+            *ngIf="column !== 'actions'"
+            class="fa-solid fa-arrow-right-arrow-left fa-rotate-90 fa-sm"
+          ></i>
+        </th>
+        <ng-container>
+          <ng-container *ngIf="column === 'userName'">
+            <td mat-cell *matCellDef="let row">
+              {{ row.employee?.userName }}
+            </td>
+          </ng-container>
+          <ng-container *ngIf="column === 'status'">
+            <td mat-cell *matCellDef="let row">
+              <div
+                class="badge p-2 my-auto"
+                [ngClass]="
+                  row.status === 'ToDo'
+                    ? 'pink'
+                    : row.status === 'Done'
+                    ? 'bg-success'
+                    : 'yellow'
+                "
+              >
+                {{ row.status }}
+              </div>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="column === 'project'" #project else default>
+            <td mat-cell *matCellDef="let row">
+              <span>{{ row.project.title }}</span>
+              <span *ngIf="!row.project">No project</span>
+            </td>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="column === 'actions'">
+          <td mat-cell *matCellDef="let row">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu class="" #menu="matMenu">
+              <ng-container *ngFor="let action of actions">
+                <ng-container>
+                  <button
+                    mat-menu-item
+                    style="margin-left: -5px; color: gray"
+                    class="justify-content-center"
+                    *ngIf="action.name === 'Edit'"
+                    (click)="onEditTask(row)"
+                  >
+                    <mat-icon style="color: gray">{{ action.icon }}</mat-icon>
+                    <span>{{ action.name }}</span>
+                  </button>
+                </ng-container>
+                <ng-container>
+                  <button
+                    mat-menu-item
+                    class="justify-content-center"
+                    *ngIf="action.name === 'Delete'"
+                    (click)="deleteItem(row)"
+                    style="padding-left: 6px; color: red"
+                  >
+                    <mat-icon style="color: red">{{ action.icon }}</mat-icon>
+                    <span>{{ action.name }}</span>
+                  </button>
+                </ng-container>
+                <ng-container>
+                  <button
+                    class="justify-content-center"
+                    mat-menu-item
+                    *ngIf="action.name === 'View'"
+                    style="color: orange"
+                    (click)="onViewTask(row)"
+                  >
+                    <mat-icon style="color: orange">{{ action.icon }}</mat-icon>
+                    <span>{{ action.name }}</span>
+                  </button>
+                </ng-container>
+              </ng-container>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <ng-container *ngIf="column === 'creationDate'" elseif project>
+          <td mat-cell *matCellDef="let row">
+            {{ row.creationDate | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+        <td #default mat-cell *matCellDef="let row">
+          {{ row[column] }}
+        </td>
+      </ng-container>
+      <tr
+        class="header"
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let even = even"
+        [ngClass]="even ? 'even' : 'odd'"
+      ></tr>
+    </table>
+  </div>
+  <div *ngSwitchCase="'projects'">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container
+        *ngFor="let column of displayedColumns"
+        [matColumnDef]="column"
+      >
+        <th mat-header-cell *matHeaderCellDef>
+          {{ column | titlecase }}
+          <i
+            *ngIf="column !== 'actions'"
+            class="fa-solid fa-arrow-right-arrow-left fa-rotate-90 fa-sm"
+          ></i>
+        </th>
+        <ng-container>
+          <ng-container *ngIf="column === 'modificationDate'">
+            <td mat-cell *matCellDef="let row">
+              {{ row.modificationDate | date : "dd/MM/yyyy" }}
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="column === 'creationDate'">
+            <td mat-cell *matCellDef="let row">
+              {{ row.creationDate | date : "dd/MM/yyyy" }}
+            </td>
+          </ng-container>
+          <ng-container *ngIf="column === 'task' || 'Num Tasks'">
+            <td mat-cell *matCellDef="let row">
+              {{ row.task.length }}
+            </td>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="column === 'actions'">
+          <td mat-cell *matCellDef="let row">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu class="" #menu="matMenu">
+              <ng-container *ngFor="let action of actions">
+                <button
+                  class="justify-content-center"
+                  mat-menu-item
+                  *ngIf="action.name === 'View'"
+                  style="color: orange"
+                  (click)="viewProject(row)"
+                >
+                  <mat-icon style="color: orange">{{ action.icon }}</mat-icon>
+                  <span>{{ action.name }}</span>
+                </button>
+
+                <ng-container>
+                  <button
+                    mat-menu-item
+                    style="margin-left: -5px; color: gray"
+                    class="justify-content-center"
+                    *ngIf="action.name === 'Edit'"
+                    (click)="editProject(row)"
+                  >
+                    <mat-icon style="color: gray">{{ action.icon }}</mat-icon>
+                    <span>{{ action.name }}</span>
+                  </button>
+                </ng-container>
+
+                <button
+                  mat-menu-item
+                  class="justify-content-center"
+                  *ngIf="action.name === 'Delete'"
+                  (click)="deleteItem(row)"
+                  style="padding-left: 6px; color: red"
+                >
+                  <mat-icon style="color: red">{{ action.icon }}</mat-icon>
+                  <span>{{ action.name }}</span>
+                </button>
+                <button
+                  *ngIf="action.name === 'Block' && !row.isActivated"
+                  mat-menu-item
+                  (click)="toggleBlock(row)"
+                  class="justify-content-center"
+                >
+                  <mat-icon>lock_open</mat-icon>
+                  <span>Unblock</span>
+                </button>
+
+                <button
+                  *ngIf="action.name === 'Unblock' && row.isActivated"
+                  mat-menu-item
+                  (click)="toggleBlock(row)"
+                  class="justify-content-center"
+                >
+                  <mat-icon style="color: gray">block</mat-icon>
+                  <span style="color: gray">Block</span>
+                </button>
+              </ng-container>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <ng-container *ngIf="column === 'creationDate'" elseif project>
+          <td mat-cell *matCellDef="let row">
+            {{ row.creationDate | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+        <td #default mat-cell *matCellDef="let row">
+          {{ row[column] }}
+        </td>
+      </ng-container>
+      <tr
+        class="header"
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let even = even"
+        [ngClass]="even ? 'even' : 'odd'"
+      ></tr>
+    </table>
+  </div>
+  <div *ngSwitchCase="'users'">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container
+        *ngFor="let column of displayedColumns"
+        [matColumnDef]="column"
+      >
+        <th mat-header-cell *matHeaderCellDef>
+          {{ column | titlecase }}
+          <i
+            *ngIf="column !== 'actions'"
+            class="fa-solid fa-arrow-right-arrow-left fa-rotate-90 fa-sm"
+          ></i>
+        </th>
+        <ng-container *ngIf="moduleName == 'users'">
+          <ng-container *ngIf="column === 'imagePath'" elseif project>
+            <td mat-cell *matCellDef="let row">
+              <img
+                class="my-2"
+                [src]="
+                  row.imagePath
+                    ? 'https://upskilling-egypt.com:3003/' + row.imagePath
+                    : 'assets/images/defaultAvatar.avif'
+                "
+                alt="avatar"
+              />
+            </td>
+          </ng-container>
+          <ng-container *ngIf="column === 'isActivated'">
+            <td mat-cell *matCellDef="let row">
+              <div
+                class="badge p-3 rounded-4"
+                [ngClass]="row.isActivated ? 'bg-success' : 'bg-danger'"
+              >
+                {{ row.isActivated ? "Active" : "Inactive" }}
+              </div>
+            </td>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="column === 'actions'">
+          <td mat-cell *matCellDef="let row">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+              <!--                 <mat-icon style="color: gray">{{ action.icon }}</mat-icon>
+                <span>{{ action.name }}</span>
+              </button>
+            </ng-container>
+
+            <button
+              mat-menu-item
+              class="justify-content-center"
+              *ngIf="action.name === 'Delete'"
+              (click)="deleteItem(row)"
+              style="padding-left: 6px; color: red"
+            >
+              <mat-icon style="color: red">{{ action.icon }}</mat-icon>
+              <span>{{ action.name }}</span>
+            </button>
+            <button
+              *ngIf="action.name === 'Block' && !row.isActivated"
+              mat-menu-item
+              (click)="toggleBlock(row)"
+              class="justify-content-center"
+            >
+              <mat-icon>lock_open</mat-icon>
+              <span>Unblock</span> -->
+            </button>
+
+            <mat-menu class="" #menu="matMenu">
+              <ng-container *ngFor="let action of actions">
+                <button
+                  class="justify-content-center"
+                  mat-menu-item
+                  *ngIf="action.name === 'View'"
+                  style="color: orange"
+                  (click)="viewUser(row)"
+                >
+                  <mat-icon style="color: orange">{{ action.icon }}</mat-icon>
+                  <span>{{ action.name }}</span>
+                </button>
+                <button
+                  *ngIf="action.name === 'Block' && !row.isActivated"
+                  mat-menu-item
+                  (click)="toggleBlock(row)"
+                  class="justify-content-center"
+                >
+                  <mat-icon>lock_open</mat-icon>
+                  <span>Unblock</span>
+                </button>
+
+                <button
+                  *ngIf="action.name === 'Unblock' && row.isActivated"
+                  mat-menu-item
+                  (click)="toggleBlock(row)"
+                  class="justify-content-center"
+                >
+                  <mat-icon style="color: gray">block</mat-icon>
+                  <span style="color: gray">Block</span>
+                </button>
+              </ng-container>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <ng-container *ngIf="column === 'creationDate'" elseif project>
+          <td mat-cell *matCellDef="let row">
+            {{ row.creationDate | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+        <td #default mat-cell *matCellDef="let row">
+          {{ row[column] }}
+        </td>
+      </ng-container>
+      <tr
+        class="header"
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let even = even"
+        [ngClass]="even ? 'even' : 'odd'"
+      ></tr>
+    </table>
+  </div>
+</div>

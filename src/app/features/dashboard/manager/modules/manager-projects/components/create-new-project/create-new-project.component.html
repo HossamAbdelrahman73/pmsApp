@@ -1,0 +1,35 @@
+<section>
+  <div class="header shadow-sm px-5 py-4">
+    <span routerLink="/dashboard/manager/manager-projects">
+      <mat-icon class="material-symbols-outlined">
+        arrow_back_ios
+        </mat-icon>
+      View All Projects </span>
+    <h2 class="pt-2" [ngClass]="{'d-none' : !addOrEditProject}">Add new Project</h2>
+    <h2 class="pt-2" [ngClass]="{'d-none' : addOrEditProject}">Edit Project</h2>
+  </div>
+  <div class="container">
+    <div class="row mt-5 p-5 shadow-sm p-3 mb-5 bg-body-tertiary">
+      <form
+        [formGroup]="createNewProjectForm"
+        (ngSubmit)="toggleCreateEditProject(createNewProjectForm)"
+        class="create-project-form"
+      >
+      <div class="form__wrapper">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput type="text" placeholder="Name" formControlName="title" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        </mat-form-field>
+        <div class="form__actions">
+          <button class="transparent-btn px-3" routerLink="/dashboard/manager/manager-projects">Cancel</button>
+          <button type="submit" class=" orange-btn  px-3">save</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</section>

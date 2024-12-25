@@ -1,0 +1,84 @@
+<section class="">
+  <div class="bg-white p-4 d-flex justify-content-between align-content-center">
+    <h1>Tasks</h1>
+
+    <button class="orange-btn py-2 px-4" routerLink="add-task">
+      <i class="fa-solid fa-plus pe-2"></i>Add New Task
+    </button>
+  </div>
+
+  <div class="container px-3">
+    <div class="d-flex align-items-center gap-4 px-3 py-2">
+      <div>
+        <mat-form-field class="" *ngIf="filterName == 'title'; else status">
+          <mat-label
+            ><i class="fa-solid fa-magnifying-glass pe-2"></i> Search</mat-label
+          >
+          <input
+            matInput
+            [(ngModel)]="searchTitle"
+            (keydown.enter)="getAllTasks()"
+            placeholder="Title"
+            #input
+          />
+        </mat-form-field>
+
+        <ng-template #status class="">
+          <div>
+            <mat-form-field class="mt-3">
+              <mat-label
+                ><i class="fa-solid fa-magnifying-glass pe-2"></i>
+                Filter</mat-label
+              >
+              <input
+                matInput
+                [(ngModel)]="searchStatus"
+                (keydown.enter)="getAllTasks()"
+                placeholder="Status"
+                #input
+              />
+            </mat-form-field>
+          </div>
+          <span class="text-secondary-emphasis bg-body-secondary">
+            values: ToDo, InProgress, Done</span
+          >
+        </ng-template>
+      </div>
+
+      <div class="">
+        <mat-form-field>
+          <mat-label>
+            <span><i class="fa-solid fa-arrow-down-short-wide pe-2"></i></span>
+            Filter</mat-label
+          >
+          <mat-select [(ngModel)]="filterName" name="food">
+            <mat-option [value]="'title'"> Title </mat-option>
+            <mat-option [value]="'status'"> Status </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <app-table
+      class="bg-secondary-subtle"
+      (DeletedItem)="DeleteItem($event)"
+      (viewedTask)="viewTask($event)"
+      (editId)="editTask($event)"
+      [displayedColumns]="displayedColumns"
+      [dataSource]="dataSource"
+      [actions]="actions"
+      [numRows]="numRows"
+      [moduleName]="moduleName"
+    ></app-table>
+  </div>
+
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="numRows"
+    [pageIndex]="pageNumber - 1"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</section>

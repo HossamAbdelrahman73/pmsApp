@@ -1,0 +1,49 @@
+<section>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-11">
+        <div class="row  justify-content-between px-0">
+          <div class="col-md-5">
+            <div class="project-title">
+              <h2>{{ data.title }}</h2>
+            </div>
+          </div>
+          <div class="col-md-7 p-0">
+            <div
+              class="project-details d-flex flex-column justify-content-center align-items-center"
+            >
+            <div class="project-details-content w-100">
+              <div>
+                <span class="fw-semibold me-1"> Tasks: </span>
+                <span>
+                  {{ data.task.length}}
+
+                </span>
+              </div>
+              <div>
+                <span class="fw-semibold me-1"> Creation date: </span>
+                <span>
+                  {{ data.creationDate | date:'short'}}
+                </span>
+              </div>
+              <div>
+                <span class="fw-semibold me-1"> Last edit: </span>
+                <span>
+                  {{ data.modificationDate | date:'short'}}
+                </span>
+              </div>
+              <div>
+                <span class="fw-semibold me-1"> Details: </span>
+                <span>
+                  {{ data.description}}
+                </span>
+              </div>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
